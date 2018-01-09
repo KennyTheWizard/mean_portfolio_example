@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-sm-12">
+    <p>Hi {{ username }}</p>
+    <p>Choose and answer for each of the questions and submit the test once done.</p>
+    <p>Good Luck</p>
+  </div>
+</div>
+<form (ngSubmit)="submitAnswers()" #questionForm="ngForm">
+  
+  <div class="form-group row" *ngFor="let question of questionList | slice:0:3; let i = index">
+    <div class="col-sm-12">
+      <label for="question">{{ i + 1 }}. {{ question.prompt }}</label>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input required class="form-check-input" type="radio" name="{{ question._id }}" id="exampleRadios1" value="{{ question.answer }}" [(ngModel)]="answers[i]">
+          {{ question.answer }}
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input required class="form-check-input" type="radio" name="{{ question._id }}" id="exampleRadios2" value="{{ question.wrongAnswerA }}" [(ngModel)]="answers[i]">
+          {{ question.wrongAnswerA }}
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input required class="form-check-input" type="radio" name="{{ question._id }}" id="{{ question._id }}" value="{{ question.wrongAnswerB }}" [(ngModel)]="answers[i]">
+          {{ question.wrongAnswerB }}
+        </label>
+      </div>
+    </div>
+  </div>
+  <p *ngIf="questionForm.invalid">All questions must be answered</p>
+  <p><a [routerLink]="['/']" class="btn btn-danger" >Cancel</a> <input [disabled]="questionForm.invalid" type="submit" value="Submit" class="btn btn-success"></p>
+</form>

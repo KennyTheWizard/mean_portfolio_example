@@ -1,0 +1,42 @@
+<div class="row" *ngIf="lastGameResult">
+  <div class="col-sm-6 mx-auto">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-text">
+          <p class="text-center">Great job, {{ lastGameResult.username }}! Your score was {{ lastGameResult.score }}/3 ({{ lastGameResult.score / 3 | percent }})</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6 mx-auto">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-text">
+          <p class="text-center"><a class="btn btn-primary" [routerLink]="['/letsplay']">Play</a></p>
+          <p class="text-center">Click the button above to start the trivia game.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="form-group row">
+  <div class="col-sm-12">
+      <label>Search:</label>
+      <input (keyup)="searchSet()" type="text" name="searchBar" id="searchBar" [(ngModel)]="searchString">
+  </div>
+</div>
+<table class="table table-striped">
+  <thead>
+    <th>Name</th>
+    <th>Score</th>
+    <th>Percentage</th>
+  </thead>
+  <tr *ngFor="let player of playerListDisplay">
+    <td>{{player.username}}</td>
+    <td>{{ player.score }}/3</td>
+    <td>{{ player.score / 3 | percent }}</td>
+  </tr>
+</table>

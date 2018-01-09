@@ -1,0 +1,24 @@
+<form (ngSubmit)="saveQuestion()" #questionForm="ngForm">
+  <h1>New Question</h1>
+  <div class="form-group">
+    <label for="questionPrompt">Question:</label>
+    <textarea #question="ngModel" class="form-control" [(ngModel)]="newQuestion.prompt" required minlength="15" class="form-control" name="prompt"></textarea>
+    <p *ngIf></p>
+  </div>
+  <div class="form-group">
+    <label for="correctAns">Correct Answer:</label>
+    <input type="text" class="form-control" name="correctAns" id="correctAns" #answer="ngModel" [(ngModel)]="newQuestion.answer" required>
+  </div>
+  <div class="form-group">
+    <label for="fakeAns1">Fake Answer 1:</label>
+    <input type="text" class="form-control" name="fakeAns1" id="fakeAns1" #wrongAnswerA="ngModel" [(ngModel)]="newQuestion.wrongAnswerA" required>
+  </div>
+  <div class="form-group">
+    <label for="fakeAns2">Fake Answer 2:</label>
+    <input type="text" class="form-control" name="fakeAns2" id="fakeAns2" #wrongAnswerB="ngModel" [(ngModel)]="newQuestion.wrongAnswerB" required>
+  </div>
+  <div>
+    <a [routerLink]="['/']" class="btn btn-danger">Cancel</a>
+    <button type="submit" [disabled]="questionForm.invalid" class="btn btn-success">Submit</button>
+  </div>
+</form>
